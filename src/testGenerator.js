@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const babelParser = require('@babel/parser');
 const jestTemplate = require('../templates/jestTemplate');
-const mochaTemplate = require('../templates/mochaTemplate');
+// const mochaTemplate = require('../templates/mochaTemplate');
 
 async function generateTests(path, framework) {
   const code = await fs.readFile(path, 'utf-8');
@@ -11,7 +11,7 @@ async function generateTests(path, framework) {
   if (framework === 'jest') {
     testCases = generateJestTestCases(ast);
   } else {
-    
+    testCases = generateJestTestCases(ast);
     // testCases = generateMochaTestCases(ast);
   }
 
