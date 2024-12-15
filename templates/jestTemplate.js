@@ -7,6 +7,7 @@ function generateTestCases(ast) {
       tests += `describe('${fn.id.name}', () => {\n`;
       tests += `  it('should work correctly', () => {\n`;
       tests += `    // Add test logic for ${fn.id.name}\n`;
+      tests += `    expect(${fn.id.name}()).toBeDefined();\n`;
       tests += `  });\n`;
       tests += `});\n\n`;
     });

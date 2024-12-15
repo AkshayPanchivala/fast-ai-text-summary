@@ -10,6 +10,7 @@ program
   .description('Generate unit tests automatically for your Node.js code')
   .version('1.0.0');
 
+// Generate tests command
 program
   .command('generate')
   .description('Generate unit tests for the provided source file or directory')
@@ -24,6 +25,7 @@ program
     }
   });
 
+// Check coverage command
 program
   .command('coverage')
   .description('Check test coverage and identify untested areas')
