@@ -21,7 +21,7 @@
   "author": "Your Name <your.email@example.com>",
   "license": "MIT",
   "bin": {
-    "fast-ai-text-summary": "./src/cli.js"
+    "fast-ai-text-summary": "./src/TextSummarizer.js"
   },
   "repository": {
     "type": "git",
