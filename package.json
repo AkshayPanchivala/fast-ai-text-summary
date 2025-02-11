@@ -2,7 +2,7 @@
   "name": "fast-ai-text-summary",
   "version": "1.0.0",
   "description": "A fast and efficient AI-powered text summarization tool for concise and readable content.",
-  "main": "src/cli.js",
+  "main": "./src/TextSummarizer.js",
   "scripts": {
     "test": "jest"
   },
@@ -18,7 +18,7 @@
     "fast summarizer",
     "smart summarizer"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Akshay Panchivala",
   "license": "MIT",
   "bin": {
     "fast-ai-text-summary": "./src/TextSummarizer.js"
