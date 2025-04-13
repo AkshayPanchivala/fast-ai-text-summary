@@ -90,20 +90,34 @@ Returns: `string` (summary of the text)
 
 ---
 
-## 🌐 SEO Optimized Keywords
+## 🌐 Keywords
 
 > AI text summarizer, Node.js summarization tool, text summary generator, JavaScript NLP summarizer, natural language processing summarizer, fast text summarizer, extractive summarizer npm, sentence rank summarization.
 
 ---
 
-## 📄 License
 
-MIT
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork this repo
+2. Create a new branch
+3. Make your changes
+4. Open a pull request
+
+See our [Code of Conduct](https://github.com/AkshayPanchivala/fast-ai-text-summary/blob/main/CODE_OF_CONDUCT.md) for guidelines.
 
 ---
 
-## 🙌 Author
+## 📜 License
 
-Developed with ❤️ by [Akshay Panchivala]  
-Feel free to contribute or open issues for improvements!
+MIT License — see [LICENSE](https://github.com/AkshayPanchivala/fast-ai-text-summary/blob/main/LICENSE.txt) for details.
+
+---
+
+## 👤 Author
+
+**Akshay Panchivala**  
+[GitHub Profile](https://github.com/AkshayPanchivala/fast-ai-text-summary)
 
