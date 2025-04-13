@@ -72,8 +72,9 @@ You can increase the number `n` to get a longer summary:
 summarytext.summarize(text, 3); // returns 3 most important sentences
 ```
 
+![Alt text](https://github.com/AkshayPanchivala/fast-ai-text-summary/blob/main/assets/outputImage.png)
+
 ---
-![Alt text](assets\outputImage.png)
 
 
 ## 📚 API
@@ -83,7 +84,7 @@ summarytext.summarize(text, 3); // returns 3 most important sentences
 | Parameter | Type     | Description                                      |
 |-----------|----------|--------------------------------------------------|
 | `text`    | `string` | The text to be summarized.                      |
-| `n`       | `number` | Number of sentences to include in the summary. |
+| `n`       | `number` | Number of lines to include in the summary. |
 
 Returns: `string` (summary of the text)
 
