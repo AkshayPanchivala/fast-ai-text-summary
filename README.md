@@ -66,14 +66,14 @@ Mahatma Gandhi, born on October 2, 1869, in Porbandar, was a key leader in India
 struggle for independence and is fondly known as the Father of the Nation.
 ```
 
+![Alt text](https://github.com/AkshayPanchivala/fast-ai-text-summary/blob/main/assets/outputImage.png)
+
+
 You can increase the number `n` to get a longer summary:
 
 ```javascript
 summarytext.summarize(text, 3); // returns 3 most important sentences
 ```
-
-![Alt text](https://github.com/AkshayPanchivala/fast-ai-text-summary/blob/main/assets/outputImage.png)
-
 ---
 
 
