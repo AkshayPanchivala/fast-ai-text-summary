@@ -2,7 +2,7 @@
 
 # 🧠 Fast AI Text Summary
 
-> Effortlessly summarize long blocks of text into concise and meaningful summaries using AI-powered keyword frequency analysis.
+**Fast AI Text Summary**is a lightweight and blazing-fast Node.js package that summarizes large blocks of text into concise, meaningful sentences using basic NLP and frequency-based extractive summarization. Ideal for chatbots, content previews, reports, and AI assistants. Easy to use and customizable.
 
 ---
 
