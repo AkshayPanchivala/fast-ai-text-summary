@@ -1,6 +1,6 @@
 {
   "name": "fast-ai-text-summary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A fast and efficient AI-powered text summarization tool for concise and readable content.",
   "main": "./src/TextSummarizer.js",
   "scripts": {
