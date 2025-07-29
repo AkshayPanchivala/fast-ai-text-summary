@@ -1,1 +1,8 @@
-ci: Update publish_npm_package workflow for TypeScript build
+feat: Improve build script cross-platform compatibility and update version
+
+Replaced Windows-specific `rmdir` commands in `build` and `prepublishOnly` scripts with `rimraf` for better cross-platform compatibility.
+Installed `rimraf` as a dev dependency.
+Updated package version to 2.1.1.
+
+This resolves the build failure on Unix-like systems caused by the `rmdir` command.
+The `glob` and `inflight` deprecation warnings remain as they are from deeply nested transitive dependencies.
