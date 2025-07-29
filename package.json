@@ -1,6 +1,6 @@
 {
   "name": "fast-ai-text-summary",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "A fast and efficient Node.js AI-powered text summarization tool for concise and readable content, using frequency-based extractive NLP techniques.",
   "type": "module",
   "main": "./dist/cjs/TextSummarizer.js",
@@ -12,7 +12,12 @@
       "import": "./dist/esm/TextSummarizer.js",
       "types": "./dist/cjs/TextSummarizer.d.ts"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./scorers": {
+      "require": "./dist/cjs/scorers.js",
+      "import": "./dist/esm/scorers.js",
+      "types": "./dist/cjs/scorers.d.ts"
+    }
   },
   "typesVersions": {
     "<4.0": {
