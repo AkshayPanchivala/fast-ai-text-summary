@@ -1,12 +1,29 @@
 {
   "name": "fast-ai-text-summary",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A fast and efficient Node.js AI-powered text summarization tool for concise and readable content, using frequency-based extractive NLP techniques.",
-  "main": "./dist/TextSummarizer.js",
-  "types": "./dist/TextSummarizer.d.ts",
+  "type": "module",
+  "main": "./dist/cjs/TextSummarizer.js",
+  "module": "./dist/esm/TextSummarizer.js",
+  "types": "./dist/cjs/TextSummarizer.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/TextSummarizer.js",
+      "import": "./dist/esm/TextSummarizer.js",
+      "types": "./dist/cjs/TextSummarizer.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "<4.0": {
+      "dist/esm/*": [
+        "dist/esm/*"
+      ]
+    }
+  },
   "scripts": {
-    "test": "jest --config jest.config.js",
-    "build": "tsc",
+    "test": "jest --config jest.config.cjs",
+    "build": "rmdir /s /q dist && tsc && tsc -p tsconfig.esm.json",
     "prepare": "npm run build",
     "prepublishOnly": "rmdir /s /q dist || true"
   },
@@ -34,7 +51,7 @@
   "author": "Akshay Panchivala",
   "license": "MIT",
   "bin": {
-    "fast-ai-text-summary": "./dist/TextSummarizer.js"
+    "fast-ai-text-summary": "./dist/cjs/TextSummarizer.js"
   },
   "files": [
     "dist/",

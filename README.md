@@ -2,7 +2,7 @@
 
 # 🧠 Fast AI Text Summary
 
-**Fast AI Text Summary** is a lightweight and blazing-fast Node.js package for efficient text summarization. It leverages basic Natural Language Processing (NLP) and frequency-based extractive techniques to distill large blocks of text into concise, meaningful sentences. This AI-powered text summarizer is ideal for applications like chatbots, content previews, and AI assistants, offering a fast and simple way to generate text summaries. It identifies important sentences based on word frequency. Please note that as an extractive summarizer, it does not account for semantic meaning or sentence position, and may not always capture the most contextually relevant information. Easy to use and customizable.
+**Fast AI Text Summary** is a lightweight and blazing-fast Node.js package for efficient text summarization. It leverages basic Natural Language Processing (NLP) and **frequency-based extractive techniques** to distill large blocks of text into concise, meaningful sentences. This AI-powered text summarizer is ideal for applications like chatbots, content previews, and AI assistants, offering a fast and simple way to generate text summaries. It identifies important sentences based on word frequency. **Please note that as an extractive summarizer, it directly extracts sentences from the original text and does not generate new content. It primarily focuses on word frequency and does not account for semantic meaning or sentence position, meaning it may not always capture the most contextually relevant information for all use cases.** Easy to use and customizable.
 
 ---
 
@@ -29,8 +29,11 @@ npm install fast-ai-text-summary
 ## 🚀 Usage
 
 ```javascript
-const TextSummarizer = require("fast-ai-text-summary").default; // Note the .default for ES module export
-const { FrequencyScorer } = require("fast-ai-text-summary"); // Import the default scorer
+// CommonJS (Node.js require)
+const TextSummarizer = require('fast-ai-text-summary');
+
+// ES Module (Node.js import or in a browser environment with module support)
+// import TextSummarizer from 'fast-ai-text-summary';
 
 // --- Basic Usage (uses default FrequencyScorer) ---
 const summarizer = new TextSummarizer();
@@ -102,6 +105,24 @@ summarytext.summarize(text, 3); // returns 3 most important sentences
 ```
 ---
 
+
+## 🚀 Performance Considerations
+
+This package is designed for speed and efficiency, especially for typical text summarization tasks. Performance scales with the length of the input text and the number of sentences requested in the summary. For very large texts (e.g., tens of thousands of words), while the package remains fast due to its frequency-based approach, it's advisable to benchmark performance within your specific application context to set accurate user expectations.
+
+## 💡 Understanding Extractive Summarization
+
+`fast-ai-text-summary` employs an **extractive summarization** method. This means it identifies and extracts the most important sentences directly from the original text based on word frequency. It does not generate new sentences or paraphrase content. This approach ensures that the summary is always grammatically correct and directly reflects the source material.
+
+**Key characteristics of extractive summaries:**
+
+*   **Directly from source:** Sentences are taken verbatim from the input text.
+*   **No new content:** The summarizer does not create new sentences or rephrase information.
+*   **Focus on frequency:** Importance is primarily determined by how frequently words appear, after filtering common stopwords.
+
+While highly efficient and useful for many applications, extractive summarization may not always capture the nuanced semantic meaning or contextual relevance as effectively as abstractive methods (which generate new sentences). It's important to consider this when setting user expectations for the type of summary produced.
+
+---
 
 ## 📚 API
 

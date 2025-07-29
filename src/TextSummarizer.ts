@@ -14,7 +14,7 @@ class TextSummarizer {
   protected splitIntoSentences(text: string): string[] {
     const sentenceTokenizer = new natural.SentenceTokenizer([], []);
     const sentences = sentenceTokenizer.tokenize(text);
-    return sentences.map(sentence => sentence.trim());
+    return sentences.map((sentence: string) => sentence.trim());
   }
 
   // Generate a frequency map of words
