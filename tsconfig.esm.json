@@ -1,11 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "esnext",
+    "module": "node16",
     "outDir": "./dist/esm",
     "declarationDir": "./dist/esm",
     "declaration": true,
-    "moduleResolution": "node"
+    "moduleResolution": "nodenext"
   },
   "include": [
     "src/**/*.ts"

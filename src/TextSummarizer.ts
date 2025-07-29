@@ -48,10 +48,10 @@ class TextSummarizer {
     const scoredSentences = this.scorer.scoreSentences(sentences, freqMap);
 
     // Sort sentences by score in descending order
-    scoredSentences.sort((a, b) => b.score - a.score);
+    scoredSentences.sort((a: SentenceScore, b: SentenceScore) => b.score - a.score);
 
     // Extract top N sentences
-    return scoredSentences.slice(0, maxSentences).map((item) => item.sentence).join(" ");
+    return scoredSentences.slice(0, maxSentences).map((item: SentenceScore) => item.sentence).join(" ");
   }
 }
 
