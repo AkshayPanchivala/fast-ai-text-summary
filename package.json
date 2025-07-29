@@ -1,10 +1,11 @@
 {
   "name": "fast-ai-text-summary",
   "version": "1.0.2",
-  "description": "A fast and efficient AI-powered text summarization tool for concise and readable content.",
-  "main": "./src/TextSummarizer.js",
+  "description": "A fast and efficient Node.js AI-powered text summarization tool for concise and readable content, using frequency-based extractive NLP techniques.",
+  "main": "./dist/TextSummarizer.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --config jest.config.js",
+    "build": "tsc"
   },
   "keywords": [
     "text summarizer",
@@ -16,13 +17,28 @@
     "content simplification",
     "AI text tool",
     "fast summarizer",
-    "smart summarizer"
+    "smart summarizer",
+    "extractive summarization",
+    "node.js",
+    "javascript",
+    "chatbot",
+    "content preview",
+    "ai assistant",
+    "document summarization",
+    "sentence ranking",
+    "frequency based"
   ],
   "author": "Akshay Panchivala",
   "license": "MIT",
   "bin": {
-    "fast-ai-text-summary": "./src/TextSummarizer.js"
+    "fast-ai-text-summary": "./dist/TextSummarizer.js"
   },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE.txt",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/AkshayPanchivala/fast-ai-text-summary.git"
@@ -32,9 +48,13 @@
   },
   "homepage": "https://github.com/AkshayPanchivala/fast-ai-text-summary#readme",
   "dependencies": {
-    "natural": "^8.0.1"
+    "natural": "^8.1.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

@@ -1,0 +1,1 @@
+ci: Update publish_npm_package workflow for TypeScript build
