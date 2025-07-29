@@ -1,1 +1,1 @@
-feat: Implement scoring abstraction
+docs: Update README.md with new usage examples and review summary
