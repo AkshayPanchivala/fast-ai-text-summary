@@ -1,15 +1,13 @@
 import * as natural from "natural";
-
-interface SentenceScore {
-  sentence: string;
-  score: number;
-}
+import { ISentenceScorer, FrequencyScorer, SentenceScore } from "./scorers";
 
 class TextSummarizer {
   private wordTokenizer: natural.WordTokenizer;
+  private scorer: ISentenceScorer;
 
-  constructor() {
+  constructor(scorer?: ISentenceScorer) {
     this.wordTokenizer = new natural.WordTokenizer();
+    this.scorer = scorer || new FrequencyScorer(this.wordTokenizer);
   }
 
   // Split text into sentences
@@ -34,14 +32,7 @@ class TextSummarizer {
     return freqMap;
   }
 
-  // Score sentences based on word frequencies
-  protected scoreSentences(sentences: string[], freqMap: { [key: string]: number }): SentenceScore[] {
-    return sentences.map((sentence: string) => {
-      const words: string[] = this.wordTokenizer.tokenize(sentence.toLowerCase());
-      const score: number = words.reduce((total: number, word: string) => total + (freqMap[word] || 0), 0);
-      return { sentence, score };
-    });
-  }
+  
 
   // Summarize text
   public summarize(text: string, maxSentences: number = 3): string {
@@ -54,7 +45,7 @@ class TextSummarizer {
 
     const sentences = this.splitIntoSentences(text);
     const freqMap = this.calculateWordFrequency(text);
-    const scoredSentences = this.scoreSentences(sentences, freqMap);
+    const scoredSentences = this.scorer.scoreSentences(sentences, freqMap);
 
     // Sort sentences by score in descending order
     scoredSentences.sort((a, b) => b.score - a.score);
