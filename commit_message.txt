@@ -1,1 +1,1 @@
-docs: Update README.md with new usage examples and review summary
+feat: Enhance package.json SEO and add GitHub Actions for PR tests
