@@ -1,24 +1,31 @@
-const natural = require("natural");
+import * as natural from "natural";
+
+interface SentenceScore {
+  sentence: string;
+  score: number;
+}
 
 class TextSummarizer {
+  private wordTokenizer: natural.WordTokenizer;
+
   constructor() {
     this.wordTokenizer = new natural.WordTokenizer();
   }
 
   // Split text into sentences
-  splitIntoSentences(text) {
-    const sentenceTokenizer = new natural.SentenceTokenizer();
+  protected splitIntoSentences(text: string): string[] {
+    const sentenceTokenizer = new natural.SentenceTokenizer([], []);
     const sentences = sentenceTokenizer.tokenize(text);
     return sentences.map(sentence => sentence.trim());
   }
 
   // Generate a frequency map of words
-  calculateWordFrequency(text) {
-    const stopwords = natural.stopwords;
-    const words = this.wordTokenizer.tokenize(text.toLowerCase())
-      .filter(word => !stopwords.includes(word));
-    const freqMap = {};
-    words.forEach((word) => {
+  protected calculateWordFrequency(text: string): { [key: string]: number } {
+    const stopwords: string[] = natural.stopwords;
+    const words: string[] = this.wordTokenizer.tokenize(text.toLowerCase())
+      .filter((word: string) => !stopwords.includes(word));
+    const freqMap: { [key: string]: number } = {};
+    words.forEach((word: string) => {
       if (!freqMap[word]) {
         freqMap[word] = 0;
       }
@@ -28,16 +35,16 @@ class TextSummarizer {
   }
 
   // Score sentences based on word frequencies
-  scoreSentences(sentences, freqMap) {
-    return sentences.map((sentence) => {
-      const words = this.wordTokenizer.tokenize(sentence.toLowerCase());
-      const score = words.reduce((total, word) => total + (freqMap[word] || 0), 0);
+  protected scoreSentences(sentences: string[], freqMap: { [key: string]: number }): SentenceScore[] {
+    return sentences.map((sentence: string) => {
+      const words: string[] = this.wordTokenizer.tokenize(sentence.toLowerCase());
+      const score: number = words.reduce((total: number, word: string) => total + (freqMap[word] || 0), 0);
       return { sentence, score };
     });
   }
 
   // Summarize text
-  summarize(text, maxSentences = 3) {
+  public summarize(text: string, maxSentences: number = 3): string {
     if (typeof text !== 'string' || text.trim() === '') {
       throw new TypeError('Input text must be a non-empty string.');
     }
@@ -57,4 +64,4 @@ class TextSummarizer {
   }
 }
 
-module.exports = TextSummarizer;
+export default TextSummarizer;

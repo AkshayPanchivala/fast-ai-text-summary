@@ -1,0 +1,1 @@
+feat: Implement senior review improvements (input validation, stop words, sentence tokenizer, README updates, and new tests)
