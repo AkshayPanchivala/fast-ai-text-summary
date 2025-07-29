@@ -1,11 +1,14 @@
 {
   "name": "fast-ai-text-summary",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A fast and efficient Node.js AI-powered text summarization tool for concise and readable content, using frequency-based extractive NLP techniques.",
   "main": "./dist/TextSummarizer.js",
+  "types": "./dist/TextSummarizer.d.ts",
   "scripts": {
     "test": "jest --config jest.config.js",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prepublishOnly": "rmdir /s /q dist || true"
   },
   "keywords": [
     "text summarizer",

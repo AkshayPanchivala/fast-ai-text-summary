@@ -6,13 +6,15 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "declaration": true
   },
+  "rootDir": "./src",
   "include": [
-    "src/**/*.ts",
-    "testcase/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "testcase"
   ]
 }
