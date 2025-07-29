@@ -62,4 +62,64 @@ describe("TextSummarizer", () => {
 
     expect(summary).toBe("This is a single sentence.");
   });
+
+  describe("Error Handling", () => {
+    test("should throw TypeError for null text input", () => {
+      expect(() => summarizer.summarize(null, 2)).toThrow(TypeError);
+    });
+
+    test("should throw TypeError for undefined text input", () => {
+      expect(() => summarizer.summarize(undefined, 2)).toThrow(TypeError);
+    });
+
+    test("should throw TypeError for non-string text input", () => {
+      expect(() => summarizer.summarize(123, 2)).toThrow(TypeError);
+      expect(() => summarizer.summarize({}, 2)).toThrow(TypeError);
+    });
+
+    test("should throw TypeError for null maxSentences input", () => {
+      expect(() => summarizer.summarize("some text", null)).toThrow(TypeError);
+    });
+
+    test("should throw TypeError for undefined maxSentences input", () => {
+      expect(() => summarizer.summarize("some text", undefined)).toThrow(TypeError);
+    });
+
+    test("should throw TypeError for non-number maxSentences input", () => {
+      expect(() => summarizer.summarize("some text", "abc")).toThrow(TypeError);
+      expect(() => summarizer.summarize("some text", {})).toThrow(TypeError);
+    });
+
+    test("should throw TypeError for zero maxSentences input", () => {
+      expect(() => summarizer.summarize("some text", 0)).toThrow(TypeError);
+    });
+
+    test("should throw TypeError for negative maxSentences input", () => {
+      expect(() => summarizer.summarize("some text", -5)).toThrow(TypeError);
+    });
+
+    test("should throw TypeError for non-integer maxSentences input", () => {
+      expect(() => summarizer.summarize("some text", 2.5)).toThrow(TypeError);
+    });
+  });
+
+  describe("Sentence Splitting Edge Cases", () => {
+    test("should handle text with no sentence-ending punctuation", () => {
+      const text = "This is a sentence without a period This is another one";
+      const sentences = summarizer.splitIntoSentences(text);
+      expect(sentences).toEqual(["This is a sentence without a period This is another one"]);
+    });
+
+    test("should handle text with excessive whitespace", () => {
+      const text = "Sentence one.  Sentence two.   Sentence three.";
+      const sentences = summarizer.splitIntoSentences(text);
+      expect(sentences).toEqual(["Sentence one.", "Sentence two.", "Sentence three."]);
+    });
+
+    test("should handle text with leading/trailing whitespace", () => {
+      const text = "  Hello world. This is a test.   ";
+      const sentences = summarizer.splitIntoSentences(text);
+      expect(sentences).toEqual(["Hello world.", "This is a test."]);
+    });
+  });
 });

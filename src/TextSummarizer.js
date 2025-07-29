@@ -7,14 +7,16 @@ class TextSummarizer {
 
   // Split text into sentences
   splitIntoSentences(text) {
-    // Split text into sentences using regex
-    const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
+    const sentenceTokenizer = new natural.SentenceTokenizer();
+    const sentences = sentenceTokenizer.tokenize(text);
     return sentences.map(sentence => sentence.trim());
   }
 
   // Generate a frequency map of words
   calculateWordFrequency(text) {
-    const words = this.wordTokenizer.tokenize(text.toLowerCase());
+    const stopwords = natural.stopwords;
+    const words = this.wordTokenizer.tokenize(text.toLowerCase())
+      .filter(word => !stopwords.includes(word));
     const freqMap = {};
     words.forEach((word) => {
       if (!freqMap[word]) {
@@ -36,6 +38,13 @@ class TextSummarizer {
 
   // Summarize text
   summarize(text, maxSentences = 3) {
+    if (typeof text !== 'string' || text.trim() === '') {
+      throw new TypeError('Input text must be a non-empty string.');
+    }
+    if (typeof maxSentences !== 'number' || !Number.isInteger(maxSentences) || maxSentences <= 0) {
+      throw new TypeError('maxSentences must be a positive integer.');
+    }
+
     const sentences = this.splitIntoSentences(text);
     const freqMap = this.calculateWordFrequency(text);
     const scoredSentences = this.scoreSentences(sentences, freqMap);
