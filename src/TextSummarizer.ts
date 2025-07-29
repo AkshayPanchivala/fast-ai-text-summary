@@ -1,5 +1,5 @@
 import * as natural from "natural";
-import { ISentenceScorer, FrequencyScorer, SentenceScore } from "./scorers";
+import { ISentenceScorer, FrequencyScorer, SentenceScore } from "./scorers.js";
 
 class TextSummarizer {
   private wordTokenizer: natural.WordTokenizer;
