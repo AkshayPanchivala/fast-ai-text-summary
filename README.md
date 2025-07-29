@@ -29,9 +29,11 @@ npm install fast-ai-text-summary
 ## 🚀 Usage
 
 ```javascript
-const FastAiTextSummary = require("fast-ai-text-summary");
+const TextSummarizer = require("fast-ai-text-summary").default; // Note the .default for ES module export
+const { FrequencyScorer } = require("fast-ai-text-summary"); // Import the default scorer
 
-const summarytext = new FastAiTextSummary();
+// --- Basic Usage (uses default FrequencyScorer) ---
+const summarizer = new TextSummarizer();
 
 const text = `
 Mahatma Gandhi, born on October 2, 1869, in Porbandar, was a key leader in India’s struggle for independence
@@ -52,10 +54,29 @@ to guide generations. His teachings remain relevant and powerful even today.
 `;
 
 try {
-  const summary = summarytext.summarize(text, 1); // '1' is number of lines/sentences in summary
-  console.log(summary);
+  const summary = summarizer.summarize(text, 1); // '1' is number of lines/sentences in summary
+  console.log("Basic Summary:", summary);
 } catch (error) {
   console.error("Error summarizing text:", error.message);
+}
+
+// --- Usage with a custom scorer (e.g., the provided FrequencyScorer explicitly) ---
+// You can pass an instance of a class that implements ISentenceScorer
+const customFrequencyScorer = new FrequencyScorer(summarizer.wordTokenizer); // Pass the wordTokenizer
+const customSummarizer = new TextSummarizer(customFrequencyScorer);
+
+try {
+  const customSummary = customSummarizer.summarize(text, 2);
+  console.log("Custom Scorer Summary:", customSummary);
+} catch (error) {
+  console.error("Error with custom scorer:", error.message);
+}
+
+// --- Example of invalid input (will throw an an error) ---
+try {
+  summarizer.summarize(null, 1); // This will throw a TypeError
+} catch (error) {
+  console.error("Caught expected error for invalid input:", error.message);
 }
 ```
 

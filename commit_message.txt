@@ -1,1 +1,1 @@
-feat: Complete TypeScript migration and update tests
+feat: Implement scoring abstraction
