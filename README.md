@@ -2,7 +2,7 @@
 
 # 🧠 Fast AI Text Summary
 
-**Fast AI Text Summary** is a lightweight and blazing-fast Node.js package for efficient text summarization. It leverages basic Natural Language Processing (NLP) and frequency-based extractive techniques to distill large blocks of text into concise, meaningful sentences. This AI-powered text summarizer is ideal for applications like chatbots, content previews, and AI assistants, offering a fast and simple way to generate text summaries. It identifies important sentences based on word frequency. Please note that as an extractive summarizer, it does not account for semantic meaning or sentence position, and may not always capture the most contextually relevant information. Easy to use and customizable.
+**Fast AI Text Summary** is a lightweight and blazing-fast Node.js package that summarizes large blocks of text into concise, meaningful sentences using basic NLP and frequency-based extractive summarization. Ideal for chatbots, content previews, reports, and AI assistants. Easy to use and customizable.
 
 ---
 
@@ -18,8 +18,6 @@
 
 ## 📦 Installation
 
-[![NPM Version](https://img.shields.io/npm/v/fast-ai-text-summary.svg)](https://www.npmjs.com/package/fast-ai-text-summary)
-
 ```bash
 npm install fast-ai-text-summary
 ```
@@ -29,11 +27,9 @@ npm install fast-ai-text-summary
 ## 🚀 Usage
 
 ```javascript
-const TextSummarizer = require("fast-ai-text-summary").default; // Note the .default for ES module export
-const { FrequencyScorer } = require("fast-ai-text-summary"); // Import the default scorer
+const fast-ai-text-summary = require("fast-ai-text-summary");
 
-// --- Basic Usage (uses default FrequencyScorer) ---
-const summarizer = new TextSummarizer();
+const summarytext = new fast-ai-text-summary();
 
 const text = `
 Mahatma Gandhi, born on October 2, 1869, in Porbandar, was a key leader in India’s struggle for independence
@@ -53,31 +49,9 @@ ideas inspired civil rights movements across the world, and his legacy of peace,
 to guide generations. His teachings remain relevant and powerful even today.
 `;
 
-try {
-  const summary = summarizer.summarize(text, 1); // '1' is number of lines/sentences in summary
-  console.log("Basic Summary:", summary);
-} catch (error) {
-  console.error("Error summarizing text:", error.message);
-}
+const summary = summarytext.summarize(text, 1); // '1' is number of lines/sentences in summary
 
-// --- Usage with a custom scorer (e.g., the provided FrequencyScorer explicitly) ---
-// You can pass an instance of a class that implements ISentenceScorer
-const customFrequencyScorer = new FrequencyScorer(summarizer.wordTokenizer); // Pass the wordTokenizer
-const customSummarizer = new TextSummarizer(customFrequencyScorer);
-
-try {
-  const customSummary = customSummarizer.summarize(text, 2);
-  console.log("Custom Scorer Summary:", customSummary);
-} catch (error) {
-  console.error("Error with custom scorer:", error.message);
-}
-
-// --- Example of invalid input (will throw an an error) ---
-try {
-  summarizer.summarize(null, 1); // This will throw a TypeError
-} catch (error) {
-  console.error("Caught expected error for invalid input:", error.message);
-}
+console.log(summary);
 ```
 
 ---
