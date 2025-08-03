@@ -28,60 +28,57 @@ npm install fast-ai-text-summary
 
 ## 🚀 Usage
 
+To use **Fast AI Text Summary**, you need to import the `TextSummarizer` class. The package supports both CommonJS and ES Modules.
+
+### ES Module (import)
+
 ```javascript
-// CommonJS (Node.js require)
-const TextSummarizer = require('fast-ai-text-summary');
-
-// ES Module (Node.js import or in a browser environment with module support)
-// import TextSummarizer from 'fast-ai-text-summary';
-
-// --- Basic Usage (uses default FrequencyScorer) ---
-const summarizer = new TextSummarizer();
+import { TextSummarizer } from 'fast-ai-text-summary';
 
 const text = `
-Mahatma Gandhi, born on October 2, 1869, in Porbandar, was a key leader in India’s struggle for independence
-and is fondly known as the Father of the Nation.His full name was Mohandas Karamchand Gandhi. After studying
-law in London, he worked in South Africa for 21 years, where he first began fighting against racial discrim-
-ination and developed his principle of Satyagraha, or non-violentresistance. Upon returning to India in 1915,
-he became a prominent figure in the Indian freedom movement. Gandhi led many peaceful protests against British
-rule, starting with the Non-Cooperation Movement in 1920, urging Indians to boycott British goods and embrace
-Khadi and self-reliance. He lived a simple life and believed in self-discipline, truth, and ahinsa(non-violence).
-In 1930, he led the historic Salt March against the British salt tax,a significant act of civil disobedience.
-Gandhi also worked to remove social evils like untouchability and called the marginalized people Harijans,
-meaning "children of God." He launched the Quit India Movement in 1942, demanding an end to British rule, and
-was jailed several times for his actions. Despite the hardships, he remained devoted to peaceful means of
-protest.His efforts were crucial in India achieving independence in 1947. However, he was deeply saddened by
-the partition of India and Pakistan. On January 30, 1948, he was tragically assassinated in New Delhi.Gandhi's
-ideas inspired civil rights movements across the world, and his legacy of peace, tolerance, and justice continues
-to guide generations. His teachings remain relevant and powerful even today.
+Natural language processing (NLP) is a subfield of linguistics, computer science, and artificial intelligence concerned with the interactions between computers and human language, in particular how to program computers to process and analyze large amounts of natural language data. The goal is a computer capable of "understanding" the contents of documents, including the contextual nuances of the language within them. The technology can then accurately extract information and insights contained in the documents as well as categorize and organize the documents themselves.
+
+Challenges in natural language processing frequently involve speech recognition, natural language understanding, and natural language generation.
 `;
 
-try {
-  const summary = summarizer.summarize(text, 1); // '1' is number of lines/sentences in summary
-  console.log("Basic Summary:", summary);
-} catch (error) {
-  console.error("Error summarizing text:", error.message);
-}
+const summarizer = new TextSummarizer();
+const summary = summarizer.summarize(text, 3);
+console.log('--- ESM Example ---');
+console.log('Summary:', summary);
+```
 
-// --- Usage with a custom scorer (e.g., the provided FrequencyScorer explicitly) ---
-// You can pass an instance of a class that implements ISentenceScorer
+### CommonJS (require)
+
+```javascript
+const { TextSummarizer } = require('fast-ai-text-summary');
+
+const text = `
+Natural language processing (NLP) is a subfield of linguistics, computer science, and artificial intelligence concerned with the interactions between computers and human language, in particular how to program computers to process and analyze large amounts of natural language data. The goal is a computer capable of "understanding" the contents of documents, including the contextual nuances of the language within them. The technology can then accurately extract information and insights contained in the documents as well as categorize and organize the documents themselves.
+
+Challenges in natural language processing frequently involve speech recognition, natural language understanding, and natural language generation.
+`;
+
+const summarizer = new TextSummarizer();
+const summary = summarizer.summarize(text, 3);
+console.log('--- CommonJS Example ---');
+console.log('Summary:', summary);
+```
+
+### Custom Scorer
+
+You can also provide your own custom scoring logic by implementing the `ISentenceScorer` interface.
+
+```javascript
+import { TextSummarizer, FrequencyScorer } from 'fast-ai-text-summary';
+
+const summarizer = new TextSummarizer();
 const customFrequencyScorer = new FrequencyScorer(summarizer.wordTokenizer); // Pass the wordTokenizer
 const customSummarizer = new TextSummarizer(customFrequencyScorer);
 
-try {
-  const customSummary = customSummarizer.summarize(text, 2);
-  console.log("Custom Scorer Summary:", customSummary);
-} catch (error) {
-  console.error("Error with custom scorer:", error.message);
-}
-
-// --- Example of invalid input (will throw an an error) ---
-try {
-  summarizer.summarize(null, 1); // This will throw a TypeError
-} catch (error) {
-  console.error("Caught expected error for invalid input:", error.message);
-}
+const summary = customSummarizer.summarize(text, 2);
+console.log("Custom Scorer Summary:", summary);
 ```
+
 
 ---
 

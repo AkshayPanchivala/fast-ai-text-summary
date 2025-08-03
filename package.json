@@ -1,6 +1,6 @@
 {
   "name": "fast-ai-text-summary",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "A fast and efficient Node.js AI-powered text summarization tool for concise and readable content, using frequency-based extractive NLP techniques.",
   "type": "module",
   "main": "./dist/cjs/TextSummarizer.js",
@@ -8,27 +8,30 @@
   "types": "./dist/cjs/TextSummarizer.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/cjs/TextSummarizer.js",
-      "import": "./dist/esm/TextSummarizer.js",
-      "types": "./dist/cjs/TextSummarizer.d.ts"
+      "import": {
+        "types": "./dist/esm/TextSummarizer.d.ts",
+        "default": "./dist/esm/TextSummarizer.js"
+      },
+      "require": {
+        "types": "./dist/cjs/TextSummarizer.d.ts",
+        "default": "./dist/cjs/TextSummarizer.js"
+      }
     },
-    "./package.json": "./package.json",
     "./scorers": {
-      "require": "./dist/cjs/scorers.js",
-      "import": "./dist/esm/scorers.js",
-      "types": "./dist/cjs/scorers.d.ts"
-    }
-  },
-  "typesVersions": {
-    "<4.0": {
-      "dist/esm/*": [
-        "dist/esm/*"
-      ]
-    }
+      "import": {
+        "types": "./dist/esm/scorers.d.ts",
+        "default": "./dist/esm/scorers.js"
+      },
+      "require": {
+        "types": "./dist/cjs/scorers.d.ts",
+        "default": "./dist/cjs/scorers.js"
+      }
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
     "test": "jest --config jest.config.cjs",
-    "build": "rimraf dist && tsc && tsc -p tsconfig.esm.json",
+    "build": "rimraf dist && tsc && node -e \"require('fs').writeFileSync('dist/cjs/package.json', JSON.stringify({type: 'commonjs'}))\" && tsc -p tsconfig.esm.json && node -e \"require('fs').writeFileSync('dist/esm/package.json', JSON.stringify({type: 'module'}))\"",
     "prepare": "npm run build",
     "prepublishOnly": "rimraf dist || true"
   },

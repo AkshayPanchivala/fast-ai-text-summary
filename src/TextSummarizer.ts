@@ -1,13 +1,17 @@
-import * as natural from "natural";
+import natural = require('natural');
 import { ISentenceScorer, FrequencyScorer, SentenceScore } from "./scorers.js";
 
-class TextSummarizer {
+export class TextSummarizer {
   private wordTokenizer: natural.WordTokenizer;
   private scorer: ISentenceScorer;
 
   constructor(scorer?: ISentenceScorer) {
     this.wordTokenizer = new natural.WordTokenizer();
-    this.scorer = scorer || new FrequencyScorer(this.wordTokenizer);
+    if (scorer) {
+      this.scorer = scorer;
+    } else {
+      this.scorer = new FrequencyScorer(this.wordTokenizer);
+    }
   }
 
   // Split text into sentences
@@ -55,4 +59,4 @@ class TextSummarizer {
   }
 }
 
-export default TextSummarizer;
+

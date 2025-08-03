@@ -1,10 +1,22 @@
-import TextSummarizer from "../src/TextSummarizer";
+import { TextSummarizer } from "../src/TextSummarizer";
+import { FrequencyScorer, ISentenceScorer } from "../src/scorers";
+import * as natural from "natural";
 
 describe("TextSummarizer", () => {
   let summarizer: TextSummarizer;
 
   beforeEach(() => {
     summarizer = new TextSummarizer();
+  });
+
+  test("should use custom scorer if provided", () => {
+    const customScorer: ISentenceScorer = {
+      scoreSentences: jest.fn().mockReturnValue([{ sentence: "custom sentence", score: 10 }]),
+    };
+    const customSummarizer = new TextSummarizer(customScorer);
+    const summary = customSummarizer.summarize("some text", 1);
+    expect(customScorer.scoreSentences).toHaveBeenCalled();
+    expect(summary).toBe("custom sentence");
   });
 
   
@@ -85,6 +97,20 @@ describe("TextSummarizer", () => {
       const text = "  Hello world. This is a test.   ";
       const summary = summarizer.summarize(text, 2);
       expect(summary).toBe("Hello world. This is a test.");
+    });
+  });
+
+  describe("Protected methods", () => {
+    test("should split text into sentences", () => {
+      const text = "This is a sentence. This is another sentence.";
+      const sentences = (summarizer as any).splitIntoSentences(text);
+      expect(sentences).toEqual(["This is a sentence.", "This is another sentence."]);
+    });
+
+    test("should calculate word frequency", () => {
+      const text = "this is a test this is another test";
+      const freqMap = (summarizer as any).calculateWordFrequency(text);
+      expect(freqMap).toEqual({ test: 2 });
     });
   });
 });
